@@ -1,5 +1,7 @@
 import {Fragment} from "react";
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 import GlobalStyles from "./styles/GlobalStyles";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
@@ -11,9 +13,17 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 60 seconds
+    },
+  },
+});
+
 function App() {
   return (
-    <Fragment>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -31,7 +41,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </Fragment>
+    </QueryClientProvider>
   );
 }
 
