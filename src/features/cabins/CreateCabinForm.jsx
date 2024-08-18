@@ -13,7 +13,6 @@ import FormRow from "../../ui/FormRow";
 function CreateCabinForm({cabinToEdit = {}}) {
   const {id: editId, ...editValues} = cabinToEdit;
   const isEditSession = Boolean(editId);
-
   const {register, handleSubmit, reset, getValues, formState} = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
@@ -118,7 +117,6 @@ function CreateCabinForm({cabinToEdit = {}}) {
         <Textarea
           type='number'
           id='description'
-          disabled={isWorking}
           defaultValue=''
           {...register("description", {required: "This field is required!"})}
         />
