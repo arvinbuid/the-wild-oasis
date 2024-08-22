@@ -3,6 +3,7 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import Spinner from "../../ui/Spinner";
+import Pagination from "../../ui/Pagination";
 import {useBookings} from "./useBookings";
 
 function BookingTable() {
@@ -27,6 +28,10 @@ function BookingTable() {
           data={bookings}
           render={(booking) => <BookingRow key={booking.id} booking={booking} />}
         />
+
+        <Table.Footer>
+          <Pagination count={25} />
+        </Table.Footer>
       </Table>
     </Menus>
   );
