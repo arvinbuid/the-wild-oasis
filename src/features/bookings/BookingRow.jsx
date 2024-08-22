@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { format, isToday } from "date-fns";
+import {format, isToday} from "date-fns";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
+import {formatCurrency} from "../../utils/helpers";
+import {formatDistanceFromNow} from "../../utils/helpers";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -44,8 +44,8 @@ function BookingRow({
     numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
+    guests: {fullName: guestName, email},
+    cabins: {name: cabinName},
   },
 }) {
   const statusToTagName = {
@@ -65,10 +65,8 @@ function BookingRow({
 
       <Stacked>
         <span>
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
+          {isToday(new Date(startDate)) ? "Today" : formatDistanceFromNow(startDate)} &rarr;{" "}
+          {numNights} night stay
         </span>
         <span>
           {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
