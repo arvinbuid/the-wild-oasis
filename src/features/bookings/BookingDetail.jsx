@@ -10,6 +10,7 @@ import Spinner from "../../ui/Spinner";
 
 import {useMoveBack} from "../../hooks/useMoveBack";
 import useBooking from "./useBooking";
+import {useCheckout} from "../check-in-out/useCheckout";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -19,10 +20,10 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const {booking, isLoading} = useBooking();
+  const {checkout, isCheckingOut} = useCheckout();
   const moveBack = useMoveBack();
 
   if (isLoading) return <Spinner />;
-
   const {status, id: bookingId} = booking;
 
   const statusToTagName = {
@@ -44,6 +45,11 @@ function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
+        {status !== "checked-out" && (
+          <Button onClick={() => checkout(bookingId)} disabled={isCheckingOut}>
+            Check out
+          </Button>
+        )}
         <Button variation='secondary' onClick={moveBack}>
           Back
         </Button>
