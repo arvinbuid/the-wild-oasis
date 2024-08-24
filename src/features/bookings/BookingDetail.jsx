@@ -1,3 +1,7 @@
+import {useMoveBack} from "../../hooks/useMoveBack";
+import {HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye, HiTrash} from "react-icons/hi2";
+import {useCheckout} from "../check-in-out/useCheckout";
+import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
@@ -8,13 +12,8 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 
-import {useMoveBack} from "../../hooks/useMoveBack";
 import useBooking from "./useBooking";
-import {useCheckout} from "../check-in-out/useCheckout";
-import {HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye, HiTrash} from "react-icons/hi2";
-import {useNavigate} from "react-router-dom";
 import Modal from "../../ui/Modal";
-import Menus from "../../ui/Menus";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
 
