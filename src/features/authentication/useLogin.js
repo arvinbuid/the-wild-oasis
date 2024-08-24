@@ -14,8 +14,12 @@ export function useLogin() {
       toast.success("Logged in successfully.");
       navigate("/dashboard", {replace: true});
     },
-    onError: () => {
-      toast.error("Provided email or password are incorrect");
+    onError: (err) => {
+      if (err.message.includes("verify your email")) {
+        toast.error("Please verify your email address before logging in.");
+      } else {
+        toast.error("Provided email or password are incorrect");
+      }
     },
   });
 
