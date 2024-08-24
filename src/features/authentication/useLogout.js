@@ -8,10 +8,9 @@ export function useLogout() {
   const queryClient = useQueryClient();
 
   const {mutate: logout, isLoading: isLoggingOut} = useMutation({
-    mutationFn: () => logoutApi,
+    mutationFn: logoutApi,
     onSuccess: () => {
-      localStorage.removeItem("sb-dzvzphczalsmiclfphyv-auth-token");
-      toast.success("Logged out successfully");
+      toast.success("Logged out successfully.");
       queryClient.removeQueries();
       navigate("/login", {replace: true});
     },

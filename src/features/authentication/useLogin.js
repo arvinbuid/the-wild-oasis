@@ -9,13 +9,13 @@ export function useLogin() {
 
   const {mutate: login, isLoading: isLoggingIn} = useMutation({
     mutationFn: ({email, password}) => loginApi({email, password}),
-    onSuccess: (user) => {
-      queryClient.setQueriesData(["user"], user); // save the login in the cache if logged in for a day
-      toast.success("Logged in successfully🚪");
+    onSuccess: (data) => {
+      queryClient.setQueryData(["user"], data.user); // save the login in the cache
+      toast.success("Logged in successfully.");
       navigate("/dashboard", {replace: true});
     },
     onError: () => {
-      toast.error("Invalid credentials for login.");
+      toast.error("Provided email or password are incorrect");
     },
   });
 
