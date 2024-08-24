@@ -1,9 +1,10 @@
 import {useState} from "react";
+import {useLogin} from "./useLogin";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
-import {useLogin} from "./useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
   const [email, setEmail] = useState("johndoe@gmail.com");
@@ -41,9 +42,7 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size='large' disabled={isLoggingIn}>
-          Login
-        </Button>
+        <Button size='large'>{!isLoggingIn ? "Login" : <SpinnerMini />}</Button>
       </FormRowVertical>
     </Form>
   );
