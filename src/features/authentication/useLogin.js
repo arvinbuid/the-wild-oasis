@@ -12,7 +12,7 @@ export function useLogin() {
     onSuccess: (user) => {
       queryClient.setQueriesData(["user"], user); // save the login in the cache if logged in for a day
       toast.success("Logged in successfully🚪");
-      navigate("/dashboard");
+      navigate("/dashboard", {replace: true});
     },
     onError: () => {
       toast.error("Invalid credentials for login.");
