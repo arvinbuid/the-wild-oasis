@@ -56,7 +56,7 @@ function BookingDetail() {
         <Modal>
           <Modal.Open opens='delete'>
             <Button icon={<HiTrash />} variation='danger'>
-              Delete
+              Delete booking
             </Button>
           </Modal.Open>
 
@@ -64,7 +64,11 @@ function BookingDetail() {
             <ConfirmDelete
               resourceName='booking'
               disabled={isDeleting}
-              onConfirm={() => deleteBooking(bookingId)}
+              onConfirm={() =>
+                deleteBooking(bookingId, {
+                  onSettled: navigate(-1),
+                })
+              }
             />
           </Modal.Window>
         </Modal>
