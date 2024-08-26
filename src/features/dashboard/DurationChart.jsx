@@ -1,4 +1,7 @@
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
+import {useDarkMode} from "../../contexts/DarkModeContext";
 import styled from "styled-components";
+import Heading from "../../ui/Heading";
 
 const ChartBox = styled.div`
   /* Box */
@@ -20,8 +23,8 @@ const ChartBox = styled.div`
 
 const startDataLight = [
   {
-    duration: "1 night",
-    value: 0,
+    duration: "1 night", // this is the namekey prop to use
+    value: 0, // this is the datakey prop to use
     color: "#ef4444",
   },
   {
@@ -105,12 +108,8 @@ const startDataDark = [
 ];
 
 function prepareData(startData, stays) {
-  // A bit ugly code, but sometimes this is what it takes when working with real data 😅
-
   function incArrayValue(arr, field) {
-    return arr.map((obj) =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
-    );
+    return arr.map((obj) => (obj.duration === field ? {...obj, value: obj.value + 1} : obj));
   }
 
   const data = stays
@@ -130,3 +129,50 @@ function prepareData(startData, stays) {
 
   return data;
 }
+
+function DurationChart({confirmedStays}) {
+  const {isDarkMode} = useDarkMode();
+
+  if (!confirmedStays) return;
+
+  const startData = isDarkMode ? startDataDark : startDataLight;
+
+  const data = prepareData(startData, confirmedStays);
+
+  return (
+    <ChartBox>
+      <Heading as='h2'>Stay Duration Summary</Heading>
+
+      <ResponsiveContainer width='100%' height='80%'>
+        <PieChart>
+          <Pie
+            nameKey='duration'
+            dataKey='value'
+            data={data}
+            innerRadius='70%'
+            outerRadius='90%'
+            cx='40%'
+            cy='50%'
+            paddingAngle={3}
+          >
+            {data.map((entry) => (
+              <Cell fill={entry.color} stroke={entry.color} key={entry.duration} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend
+            layout='vertical'
+            verticalAlign='middle'
+            align='right'
+            iconType='circle'
+            iconSize='1.5rem'
+            formatter={(value) => ` ${value}`}
+            wrapperStyle={{right: 30}}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </ChartBox>
+  );
+}
+
+export default DurationChart;
