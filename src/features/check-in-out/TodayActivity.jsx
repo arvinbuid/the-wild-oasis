@@ -1,5 +1,6 @@
 import {useTodayActivity} from "./useTodayActivity";
 import styled from "styled-components";
+import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
 import Spinner from "../../ui/Spinner";
 import TodayItem from "./TodayItem";
@@ -42,6 +43,8 @@ function TodayActivity() {
 
   return (
     <StyledToday>
+      <Heading as='h2'>Today&apos;s Activity</Heading>
+
       <Row type='horizontal'>
         {!isLoadingTodayActivities ? (
           activities?.length > 0 ? (
