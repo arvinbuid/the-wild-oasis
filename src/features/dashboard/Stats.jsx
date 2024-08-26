@@ -7,9 +7,10 @@ import {
 import Stat from "./Stat";
 import {formatCurrency} from "../../utils/helpers";
 import SpinnerMini from "../../ui/SpinnerMini";
+import Spinner from "../../ui/Spinner";
 
 function Stats({bookings, confirmedStays, numDays, cabinCount}) {
-  if (!bookings || !confirmedStays || !numDays || !cabinCount) return;
+  if (!bookings || !confirmedStays || !numDays || !cabinCount) return <Spinner />;
 
   // 1. Number of bookings
   const numBookings = bookings.length;
